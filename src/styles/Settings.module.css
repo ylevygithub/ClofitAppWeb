@@ -1,0 +1,35 @@
+.pageContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #ff758c 0%, #ff7eb3 100%);
+}
+
+.logoutButton {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logoutButton:hover {
+  background-color: #f1f1f1;
+}
+
+.deleteButton {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  background-color: #ff4d4d;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.deleteButton:hover {
+  background-color: #cc0000;
+}

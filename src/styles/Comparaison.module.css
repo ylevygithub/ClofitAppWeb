@@ -1,0 +1,107 @@
+/* Comparaison.module.css */
+.gradientBackground {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom, #ff758c 0%, #ff7eb3 100%);
+}
+
+.inputContainer {
+  text-align: center;
+}
+
+.inputField {
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  width: 80%; /* Ou une autre largeur en fonction de votre design */
+
+  /* Définissez une largeur suffisante pour le champ de saisie pour accommoder le texte du placeholder */
+  width: calc(100% - 20px); /* Soustrayez le double du padding horizontal pour obtenir la largeur intérieure réelle */
+
+  /* Ajustez la taille de la police si nécessaire pour que le texte tienne */
+  font-size: 16px; /* Ajustez cette valeur en fonction de la longueur du placeholder */
+
+  /* Si votre texte est toujours coupé, vous pouvez utiliser la propriété text-overflow dans un pseudo-élément */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.inputField::placeholder {
+  /* Couleur du texte du placeholder pour une meilleure lisibilité */
+  color: rgba(0, 0, 0, 0.5);
+
+  /* Vous pouvez également ajuster la taille de la police si nécessaire */
+  font-size: 16px; /* Assurez-vous que cela correspond à la propriété font-size de .inputField */
+  
+  /* Gérer l'overflow du placeholder */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.confirmButton {
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  border: 1px solid black;
+  padding: 10px;
+  width: fit-content;
+  cursor: pointer;
+  box-shadow: 0 2px 10px var(--black-a7);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.confirmButton:hover {
+  background-color: black;
+  color: white;
+}
+
+/* ... Autres styles ... */
+
+.confirmationContainer {
+  text-align: center;
+}
+
+.confirmationText {
+  /* Styles pour le texte de confirmation */
+  font-family: 'Lato', sans-serif;
+}
+
+.productInfo {
+  /* Styles pour afficher les informations du produit */
+  font-weight: bold;
+  margin-top: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.buttonContainer {
+  /* Styles pour le conteneur des boutons */
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Espace entre les boutons */
+  margin-top: 30px;
+}
+
+.cancelButton {
+  color: black;
+  border-radius: 8px;
+  border: 1px solid black;
+  padding: 10px;
+  width: fit-content;
+  cursor: pointer;
+  box-shadow: 0 2px 10px var(--black-a7);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: #D45055; /* Rouge */
+}
+
+.cancelButton:hover {
+  background-color: #f44336;
+  color: white;
+}
+
