@@ -1,4 +1,4 @@
-const BaseUrl = "http://api.clofit.fr";
+const BaseUrl = "https://api.clofit.fr";
 
 type Headers = { [key: string]: string };
 
