@@ -36,7 +36,14 @@ const Comparaison: React.FC = () => {
     router.back();
   };
 
+  const getLastWord = (chaine: string): string => {
+    const words = chaine.split(" ");
+    const lastWord = words[words.length - 1];
+    return lastWord;
+  }
+  
   const handleFinalConfirm = () => {
+    localStorage.setItem('itemName', getLastWord(productInfo));
     // Redirection vers une autre page sur confirmation
     router.push('/compare/last-comparison');
   };

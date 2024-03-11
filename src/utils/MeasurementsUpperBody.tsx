@@ -23,7 +23,7 @@ const MeasurementsUpperBody = () => {
     profilName,//name
     setProfilName
   } = useFromUpperBody();
-  const { setProfils } = useProfil();
+  const { profils, setProfils } = useProfil();
   const name = profilName;
   const epaule = shoulderToShoulder;
   const dos = backLength;
@@ -45,6 +45,14 @@ const MeasurementsUpperBody = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitted(true);
+    const obj: any = { profil: profilName, shoulderToShoulder: shoulderToShoulder, backLength: backLength, chestSize: chestSize };
+    // localStorage.setItem('profils', obj);
+    localStorage.setItem(
+      "profils",
+      JSON.stringify(obj)
+    );
+
+    setProfils(obj);
     handleAddProfil();
     setTimeout(() => {
       setSubmitted(false);
@@ -60,19 +68,19 @@ const MeasurementsUpperBody = () => {
       <div className={styles.card}>
         <form onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
-            <input type="text" value={shoulderToShoulder} onChange={(e) => setShoulder(e.target.value)} placeholder="épaule à épaule" />
+            <input type="text" onChange={(e) => setShoulder(e.target.value)} placeholder="épaule à épaule" />
             <span>En cm</span>
           </div>
           <div className={styles.inputGroup}>
-            <input type="text" value={backLength} onChange={(e) => setBackLength(e.target.value)} placeholder="Longueur de dos" />
+            <input type="text" onChange={(e) => setBackLength(e.target.value)} placeholder="Longueur de dos" />
             <span>En cm</span>
           </div>
           <div className={styles.inputGroup}>
-            <input type="text" value={chestSize} onChange={(e) => setChestSize(e.target.value)} placeholder="Tour de poitrine" />
+            <input type="text" onChange={(e) => setChestSize(e.target.value)} placeholder="Tour de poitrine" />
             <span>En cm</span>
           </div>
           <div className={styles.inputGroup}>
-            <input type="text" value={profilName} onChange={(e) => setProfilName(e.target.value)} placeholder="Nom du profil" />
+            <input type="text" onChange={(e) => setProfilName(e.target.value)} placeholder="Nom du profil" />
           </div>
           <button className={styles.submitButton} type="submit">Continuer</button>
           {submitted && (

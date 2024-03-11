@@ -8,6 +8,7 @@ import '../styles/form.css';
 import { useUser } from '../../contexts/user';
 import { useRouter } from 'next/navigation';
 import { ClofitAPI } from './ClofitApi';
+import AccessVerification from './ApiFailure';
 
 const MyFormSubscribe = () => {
   const [name, setName] = useState('');
@@ -26,18 +27,18 @@ const MyFormSubscribe = () => {
 
   const handleInscription = async () => {
     try {
-        const response = await ClofitAPI.inscrireUtilisateur({ email, password, name });
-        console.log('Inscription réussie:', response);
-        if (response.statusMessage === 'email already use') alert('Email already used');
-        else {
-          setToken(response.token);
-          localStorage.setItem('token', response.token);
-          setUserId(response.userId);
-          localStorage.setItem('userId', response.userId);
-          setUserConnected(true);
-          router.push('/');
-        }
-        // Traitez la réponse selon vos besoins
+          const response = await ClofitAPI.inscrireUtilisateur({ email, password, name });
+          if (response.statusMessage === 'email already use') alert('Email already used');
+          else {
+            console.log('Inscription réussie:', response);
+            setToken(response.token);
+            localStorage.setItem('token', response.token);
+            setUserId(response.userId);
+            localStorage.setItem('userId', response.userId);
+            setUserConnected(true);
+            router.push('/');
+          }
+        // }
     } catch (error) {
         console.error('Erreur lors de l\'inscription:', error);
     }

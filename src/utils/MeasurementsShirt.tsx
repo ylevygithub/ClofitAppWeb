@@ -4,13 +4,26 @@ import { FormEvent, useState } from 'react';
 import styles from '../styles/MeasurementsUpperBody.module.css'; // Assurez-vous de créer un fichier CSS correspondant
 import { Text } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
+import { useFromShirt } from '../../contexts/fromShirt';
+import { useProfil } from '../../contexts/profil';
 
 const MeasurementsShirt = () => {
   const [submitted, setSubmitted] = useState(false);
 	const router = useRouter();
+  const {
+    sleeveLength, setSleeveLength, 
+    backLength, setBackLength, 
+    chestSize, setChestSize,
+    profilName, setProfilName
+  } = useFromShirt();
+  const { profils, setProfils } = useProfil();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // const obj = { "profil": profilName, "sleeveLength": sleeveLength, "backLength": backLength, "chestSize": chestSize };
+    const obj: any = { profil: profilName, sleeveLength: sleeveLength, backLength: backLength, chestSize: chestSize };
+
+    setProfils([...profils!, obj]);
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -19,6 +32,23 @@ const MeasurementsShirt = () => {
     router.push('/modules/add-profil');
   };
 
+  const handleSleeveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const inputValue = event.target.value;
+    setSleeveLength(inputValue === "" ? "" : inputValue);
+	};
+  const handleBackChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const inputValue = event.target.value;
+    setBackLength(inputValue === "" ? "" : inputValue);
+	};
+  const handleChestChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const inputValue = event.target.value;
+    setChestSize(inputValue === "" ? "" : inputValue);
+	};
+  const handleProfilNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const inputValue = event.target.value;
+    setProfilName(inputValue === "" ? "" : inputValue);
+	};
+
   return (
     <div className={styles.container}>
       <Text style={{fontSize: '30px'}}>Enregistrement des mensurations</Text>
@@ -26,19 +56,31 @@ const MeasurementsShirt = () => {
       <div className={styles.card}>
         <form onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
-            <input placeholder="Longueur des manches" />
+            <input placeholder="Longueur des manches"
+              onChange={handleSleeveChange}
+              value={sleeveLength ?? ""}
+            />
             <span>En cm</span>
           </div>
           <div className={styles.inputGroup}>
-            <input placeholder="Longueur de dos" />
+            <input placeholder="Longueur de dos"
+              onChange={handleBackChange}
+              value={backLength ?? ""}
+            />
             <span>En cm</span>
           </div>
           <div className={styles.inputGroup}>
-            <input placeholder="Tour de poitrine" />
+            <input placeholder="Tour de poitrine"
+              onChange={handleChestChange}
+              value={chestSize ?? ""}
+            />
             <span>En cm</span>
           </div>
           <div className={styles.inputGroup}>
-            <input placeholder="Nom du profil" />
+            <input placeholder="Nom du profil" 
+              onChange={handleProfilNameChange}
+              value={profilName ?? ""}
+            />
           </div>
           <button className={styles.submitButton} type="submit">Continuer</button>
           {submitted && (

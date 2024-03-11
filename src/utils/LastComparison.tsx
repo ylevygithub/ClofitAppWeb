@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/Comparaison.module.css'; // Importez votre module CSS ici
 import { useRouter } from 'next/navigation';
 
@@ -10,6 +10,17 @@ const LastComparison: React.FC = () => {
   const [profile, setProfile] = useState<string>('TestProfile'); // You will populate this from profiles
   const [comparisonType, setComparisonType] = useState<string>('Vêtement');
   const router = useRouter();
+  const [profilLS, setProfil] = useState<string>('');
+
+  useEffect(() => {
+    // Récupérer les données depuis localStorage
+    localStorage.setItem('itemSize', "S");
+    const profilsData = localStorage.getItem('profils');
+    if (profilsData) {
+      const profils = JSON.parse(profilsData);
+      setProfil(profils.profil);
+    }
+  }, []);  
 
   // Dummy data - replace with actual data
   const profiles = ['Profile 1', 'Profile 2', 'Profile 3'];
@@ -18,6 +29,7 @@ const LastComparison: React.FC = () => {
   // Handle change events for the select elements
   const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSize(e.target.value);
+    localStorage.setItem('itemSize', e.target.value);
   };
 
   const handleProfileChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,6 +47,7 @@ const LastComparison: React.FC = () => {
 
   return (
     <div className={styles.gradientBackground}>
+      <button onClick={() => router.push('/modules')} style={{position: 'absolute', left: '20px', top: '20px'}} className='button_style'>Menu</button>
       <div className={styles.inputContainer}>
       <h1 className="text-2xl font-bold text-white mb-6">Comparer à partir d'un vêtement</h1>
       <h1 className="text-2xl font-bold text-white mb-6" style={{marginBottom: '30px'}}>Ou bien à partir de mensurations</h1>
@@ -48,9 +61,10 @@ const LastComparison: React.FC = () => {
         </div>
         <div className="mb-4">
           <select id="profile-select" value={profile} onChange={handleProfileChange} className={styles.inputField}>
-          {profiles.map((p) => (
+          {/* {profiles.map((p) => (
               <option key={p} value={p}>{p}</option>
-            ))}
+            ))} */}
+              <option key={123} value={profilLS}>{profilLS}</option>
           </select>
         </div>
         <div className="mb-6">

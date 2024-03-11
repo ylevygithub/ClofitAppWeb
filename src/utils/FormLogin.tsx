@@ -74,6 +74,19 @@ const LoginPage = () => {
     }
   };
 
+  const handleRecuperation = async () => {
+    try {
+        const response = await ClofitAPI.RecupPasswordUtilisateur({ email });
+        console.log('Recuperation :', response);
+        if (response.statusMessage === 'User Unkown') alert('User unknown');
+        else {
+          router.push('/');
+        }
+    } catch (error) {
+        console.error('Erreur lors de la recuperation:', error);
+    }
+  };
+
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild >
@@ -118,8 +131,7 @@ const LoginPage = () => {
               </div> */}
 
               <div style={{textAlign: 'center'}}>
-                <Dialog.Title style={{ marginTop: '40px' }}>Vous n'avez pas de compte ? Inscrivez vous :D</Dialog.Title>
-                <button onClick={() => router.push("/subscribe")} className='button_style'>S'inscrire</button>
+                <button onClick={handleRecuperation} className='button_style'>Mot de passe oublié ?</button>
               </div>
             </Flex>
         </Dialog.Content>

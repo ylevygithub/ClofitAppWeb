@@ -8,6 +8,7 @@ import { Theme } from '@radix-ui/themes';
 import UserProvider from '../../contexts/user';
 import UpperBodyProvider from '../../contexts/fromUpperBody';
 import ProfilProvider from '../../contexts/profil';
+import ShirtProvider from '../../contexts/fromShirt';
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ['latin'] })
@@ -26,9 +27,11 @@ export default function RootLayout({
     <html lang="en">
       <UserProvider>
         <UpperBodyProvider>
-          <ProfilProvider>
-            <body className={inter.className}>{children}</body>
-          </ProfilProvider>
+          <ShirtProvider>
+            <ProfilProvider>
+              <body className={inter.className}>{children}</body>
+            </ProfilProvider>
+          </ShirtProvider>
         </UpperBodyProvider>
       </UserProvider>
     </html>
